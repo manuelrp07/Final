@@ -60,10 +60,11 @@
               .attr("class",function(d){return "header "+d;})
             //Add header titles
             headersT= headersG.append("text")
-              .attr("x", function(d,i){return 2+padding+i*width;})
+              .attr("x", function(d,i){return -2+padding+(1+i)*width;})
               .attr("y", padding+height-3)
               .attr("fill", "black")
               .attr("style","font-size:20px")
+              .attr("text-anchor","end")
               .text(function(d){return d;});
             //Create chart body
             data.forEach(function(element, i){
@@ -108,10 +109,11 @@
                     .attr("class", function(){return Object.keys(element)[j]+" "+element.ItemNo;});
                   //Create text for each cell
                   bodyT= bodyC.append("text")
-                    .attr("x", function(){return 2+padding+j*width;})
+                    .attr("x", function(){return -2+padding+(1+j)*width;})
                     .attr("y", padding+(2+i)*height-3)
                     .attr("fill", "black")
                     .attr("style","font-size:20px")
+                    .attr("text-anchor","end")
                     .text(function(){return data[i][Object.keys(element)[j]];});
               });
             });
