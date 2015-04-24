@@ -53,13 +53,12 @@
               .on("click", function(){
                 var myThis=d3.select(this)
                 var criteria=myThis.attr("class")
-                console.log(data)
                 newData=data
                   .sort(function(a,b){return d3.ascending(a[criteria],b[criteria]);});
                 //Erase previous rows
                 d3.selectAll(".item").remove();
-                //Daw new table
-                drawBody(newData);
+                 //Daw new table
+                drawBody(data)
                 //Highlight column header
                 d3.selectAll("rect.header")
                   .attr("fill","lightgrey");
@@ -84,7 +83,8 @@
               .attr("style","font-size:20px")
               .attr("text-anchor","end")
               .text(function(d){return d;});
-          drawBody(data);
+            
+            drawBody(data);
           });
         //Function that draws the body of the table for a given dataset
         function drawBody(mydata){
