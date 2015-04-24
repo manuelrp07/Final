@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Midterm Data Visualization">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <script type"text/javascript" src="javascripts/d3.js"></script>
+    <title>My Final Exam</title>
+  </head>
+
+  <body>
+    <!--Header-->
+    <div id="myheader">
+      <h1>Data Visualization Final Exam</h1>
+      <h2>Manuel Ramirez</h2>
+      <h3>IE 590</h3>  
+    </div>   
+    <!--IndexLeft-->
+    <div id="myIndex">
+      <h1>Index</h1>
+      <h3>3.1. Static Spreadsheet</h3>
+      <h3><a href="index_3_2.html">3.2. Spreadsheet with Typical Sorting</a></h3>
+      <h3><a href="index_3_3.html">3.3. Spreadsheet with SimulSort</a></h3>
+    </div>
+    <!--Body-->
+    <div id="myBody">
+      <!--Participants Header-->
+      <div id="mainDiv">
+        <!--3.1. Bar Chart-->
+        <h2>3.1. Static Spreadsheet</h2>
+        <script type="text/javascript">
+          //Read datafile
+          d3.json("https://hivelab.org/static/exam2.json",function(data){
+            var padding=30;
+            var w=600;
+            var h=w*2/3;
+            var width=(w-2*padding)/8;
+            var height=22;
+            //Create SVG
+            svg=d3.select("#mainDiv")
+                  .append("svg")
+                  .attr("width",w)
+                  .attr("height",h)
+                  .style("background","ghostwhite"); 
+            //Create header groups
+            headersG=svg.selectAll(".header")
+              .data(Object.keys(data[0]))
+              .enter()
+              .append("g")
+            //Create headers cells/rectangles
+            headersR= headersG.append("rect")
+              .attr("width", width)
+              .attr("height", height)
+              .attr("x", function(d,i){return padding+i*width;})
+              .attr("y", padding)
+              .attr("fill", "lightgrey")
+              .attr("stroke", "grey")
+              .attr("stroke-width", "1px")
+              .attr("class",function(d){return "header "+d;})
+            //Add header titles
+            headersT= headersG.append("text")
+              .attr("x", function(d,i){return 2+padding+i*width;})
+              .attr("y", padding+height-3)
+              .attr("fill", "black")
+              .attr("style","font-size:20px")
+              .text(function(d){return d;});
+            //Create chart body
+            data.forEach(function(element, i){
+              //Create a group for each element in data
+              bodyE=svg.selectAll(function(){return "."+element.ItemNo;})
+                .data(Object.keys(element))
+                .enter()
+                .append("g")
+                .attr("class", function(){return element.ItemNo;})
+              //For each group (element in dataser) create group for cells/rectangles and text
+              Object.keys(element).forEach(function(entity, j){
+                  //Create a group for each cell
+                  bodyC= bodyE.append("g")
+                    .attr("class", function(){return Object.keys(element)[j];})
+                    .on("mouseover", function(){
+                      d3.selectAll("rect#white")
+                        .attr("fill","white");
+                      d3.selectAll(".header")
+                        .attr("fill","lightgrey");
+                      d3.selectAll("."+Object.keys(element)[j]+"#white")
+                        .attr("fill","yellow");
+                    })
+                    .on("click", function(){
+                      d3.selectAll("rect")
+                        .attr("fill","white")
+                        .attr("id", "white");
+                      d3.selectAll(".header")
+                        .attr("fill","lightgrey");
+                      d3.selectAll("."+element.ItemNo)
+                        .attr("fill","lightgreen")
+                        .attr("id", "green");
+                    });
+                  //Create rectangle for each cell
+                  bodyR= bodyC.append("rect")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("x", function(){return padding+j*width;})
+                    .attr("y", padding+(1+i)*height)
+                    .attr("fill", "#F8F8F8")
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", "1px")
+                    .attr("class", function(){return Object.keys(element)[j]+" "+element.ItemNo;});
+                  //Create text for each cell
+                  bodyT= bodyC.append("text")
+                    .attr("x", function(){return 2+padding+j*width;})
+                    .attr("y", padding+(2+i)*height-3)
+                    .attr("fill", "black")
+                    .attr("style","font-size:20px")
+                    .text(function(){return data[i][Object.keys(element)[j]];});
+              });
+            });
+          });
+        </script>
+      </div>
+    </div>  
+  </body>
+</html>
