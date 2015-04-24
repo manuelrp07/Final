@@ -82,17 +82,13 @@
                     .on("mouseover", function(){
                       d3.selectAll("rect#white")
                         .attr("fill","white");
-                      d3.selectAll(".header")
-                        .attr("fill","lightgrey");
-                      d3.selectAll("."+Object.keys(element)[j]+"#white")
-                        .attr("fill","yellow");
+                      d3.selectAll("#white."+element.ItemNo)
+                        .attr("fill","yellow")
                     })
                     .on("click", function(){
-                      d3.selectAll("rect")
+                      d3.selectAll("rect.cell")
                         .attr("fill","white")
                         .attr("id", "white");
-                      d3.selectAll(".header")
-                        .attr("fill","lightgrey");
                       d3.selectAll("."+element.ItemNo)
                         .attr("fill","lightgreen")
                         .attr("id", "green");
@@ -106,7 +102,8 @@
                     .attr("fill", "#F8F8F8")
                     .attr("stroke", "grey")
                     .attr("stroke-width", "1px")
-                    .attr("class", function(){return Object.keys(element)[j]+" "+element.ItemNo;});
+                    .attr("class", function(){return "cell "+Object.keys(element)[j]+" "+element.ItemNo;})
+                    .attr("id","white");
                   //Create text for each cell
                   bodyT= bodyC.append("text")
                     .attr("x", function(){return -2+padding+(1+j)*width;})
@@ -119,6 +116,7 @@
             });
           });
         </script>
+        <p> Hover over the cells of the table below in order to highlight the corresponding row. By clicking on any cell, the corresponding row will be highlighted in a diffeernt color.</p>
       </div>
     </div>  
   </body>
