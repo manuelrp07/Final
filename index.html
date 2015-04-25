@@ -7,6 +7,46 @@
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <script type"text/javascript" src="javascripts/d3.js"></script>
     <title>My Final Exam</title>
+    <style>
+       *{
+          font-family:Garamond;
+        }
+
+        #myheader{
+          height: 160px;
+          min-width:930px;
+          text-align:center;
+          background-color: #F0F0F0 ;
+          border:2px solid #E0E0E0;
+          border-radius: 10px;
+        }
+        #myIndex{
+          position:fixed;
+          top:182px;
+          text-align:right;
+          background-color: white ;
+          line-height: 100%;
+          width: 240px;
+          padding-right: 10px;
+          float:left;
+          border:2px solid #E0E0E0;
+          border-radius: 10px;
+        }
+        #myBody{
+          margin: 10px;
+          top: 2000px;
+          margin-left:250px;
+        }
+        #mainDiv{
+          margin: 10px;
+          text-align:center;
+          background-color: #F8F8F8 ;
+          border:2px solid #E0E0E0;
+          border-radius: 10px;
+          min-width:670px;
+          max-width:1020px;
+        }
+    </style>
   </head>
 
   <body>
@@ -83,7 +123,7 @@
                       d3.selectAll("rect#white")
                         .attr("fill","white");
                       d3.selectAll("#white."+element.ItemNo)
-                        .attr("fill","yellow")
+                        .attr("fill","yellow");
                     })
                     .on("click", function(){
                       d3.selectAll("rect.cell")
