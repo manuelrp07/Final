@@ -11,7 +11,9 @@
        *{
           font-family:Garamond;
         }
-
+        p:first-letter{ 
+          font-size:200%;
+        }
         #myheader{
           height: 160px;
           min-width:930px;
@@ -68,7 +70,7 @@
       <!--Participants Header-->
       <div id="mainDiv">
         <!--3.1. Bar Chart-->
-        <h2>3.1. Static Spreadsheet</h2>
+        <h2>3.3. Spreadsheet with SimulSort</h2>
         <script type="text/javascript">
           //Read datafile
           d3.json("https://hivelab.org/static/exam2.json",function(data){
@@ -203,6 +205,7 @@
             });
           });
         </script>
+      <p>As in the previous visualizations, you can highlight the rows by hovering over them and by clicking on them. Besides this feature, columns can be sorted individually.</p>
       </div>
     </div>  
   </body>
